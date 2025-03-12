@@ -9,6 +9,7 @@ app.use(express.json())
 app.use(cors())
 app.post('/api/chat' , async (req , res) =>{
  
+    console.log(req.body)
     let result = await gemini(req.body.prompt)
     res.json(result)
 })

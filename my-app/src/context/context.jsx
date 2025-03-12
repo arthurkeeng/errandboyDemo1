@@ -10,6 +10,7 @@ export const ContextProvider =( props ) => {
   const [showResult , setShowResult] = useState(false)
   const [loading , setLoading] = useState(false)
   const [resultData , setResultData] = useState("")
+  const [chatHistory , setChatHistory] = useState([]);
   const onSent = async(prompt) =>{
     
     const res = await fetch('http://localhost:3000/api/chat', {
@@ -17,7 +18,8 @@ export const ContextProvider =( props ) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({prompt : input})
+     body: prompt !== undefined ?JSON.stringify({prompt }):
+          JSON.stringify({prompt: input})
     })
     const response = {response : await res.json() , 
       hasReturned : true
@@ -27,7 +29,8 @@ export const ContextProvider =( props ) => {
 
   const contextValue = {
     previousPrompt , setPreviousPrompt , onSent , 
-    setRecentPrompt , recentPrompt , showResult , loading , resultData , input , setInput , setLoading , setShowResult , setResultData , 
+    setRecentPrompt , recentPrompt , showResult , loading , resultData , input , setInput , setLoading , setShowResult , setResultData ,setChatHistory , chatHistory 
+
   }
 
   return (

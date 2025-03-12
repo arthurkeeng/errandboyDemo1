@@ -26,8 +26,9 @@ async function run(prompt) {
     ],
   });
 
-  const result = await chatSession.sendMessage(prompt);
-  return result.response.text()
+  const result = await chatSession.sendMessage({
+    content : [{role : "user" , parts : [{text : prompt}]}]});
+   return result.response.text()
 }
 
 module.exports = run;
